@@ -1,0 +1,27 @@
+services:
+    db:
+      image: postgres
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: pwd
+        POSTGRES_DB: meal_db
+      expose:
+        - "5432"                                  # We need only expose port `5432` internally to node (not the host)
+      volumes:
+        - final-db:/var/lib/postgresql/data  # Creates a docker managed volume to persist your data.
+        - ./init_data:/docker-entrypoint-initdb.d # Binds ./init_data to docker-entrypoint-initdb.d.
+    web:
+      image: node:12
+      user: "node"                                # Use a non-root user node
+      working_dir: /home/node/app                 # with home directory /home/node/app
+      depends_on:
+        - db                                      # This indicates that docker should start the database first,
+                                                  # otherwise our website would have no data.
+      ports:
+          - "3000:3000"                           # Here we do need to publish the port for viewing on the host.
+      volumes:
+        - ./:/home/node/app                       # Binds the current directory (containing our source code) into the image,
+      command: "npm start" 
+  volumes:
+    final-db: {}
+  
