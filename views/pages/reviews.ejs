@@ -1,0 +1,41 @@
+<%- include('../partials/header'); -%>
+    <nav class="navbar navbar-expand-sm navbar-light" style="background-color:rgba(32, 32, 32, 0);">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="main">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="reviews">Reviews</a>
+            </li>
+        </ul>
+    </nav>
+
+    <form action="/filter" method="post" id="filter_form">
+        <div>
+            <input type="text" class="form-control" id="filterBy" name="filter_by" placeholder="Enter a meal name">
+            <input type="submit" value="submit" class="btn btn-primary btn-block">
+        </div>
+    </form>
+
+    <div class="container">
+		<br>
+		
+		<table class="table table-bordered" id="review_table">
+			<tr>
+				<th class="align-bottom">Meal</th>
+				<th class="align-bottom">Review</th>
+				<th class="align-bottom">Review Date</th>
+			</tr>
+
+			<%
+				if(data){
+					var rows = '';
+					data.forEach(function(item){
+						rows += '<tr><td>' + item.meal_name + '</td><td>' + item.review + '</td><td>' + item.review_date + '</td>';
+					}); %>
+				<%- rows %>
+			<% } %>
+		</table>
+	</div>
+
+<%- include('../partials/footer'); -%>
