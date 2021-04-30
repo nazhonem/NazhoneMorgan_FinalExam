@@ -1,0 +1,40 @@
+/* Search bar */
+* {
+    box-sizing: border-box;
+}
+
+.center {
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+form.navbar1 input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    float: left;
+    width: 100%;
+    background: #f1f1f1;
+}
+form.navbar1 button {
+    float: left;
+    width: 20%;
+    padding: 7.5px;
+    background: darkgrey;
+    color: white;
+    font-size: 17px;
+    border: none;
+    border-left: none;
+    cursor: pointer;
+}
+form.navbar1 button:hover {
+    background: gray;
+}
+form.navbar1::after {
+    content: "";
+    clear: both;
+    display: table;
+}
